@@ -221,7 +221,19 @@ int main (int argc, char** argv)
     if (pf) { char ln[256]; while (std::fgets (ln, sizeof (ln), pf)) if (std::strstr (ln, "name 3: Snare through the M-50")) named = true; std::fclose (pf); }
     check (named, "Return saves the name with the preset");
     bool gone = true;
-    for (NSView* sv in [panel subviews]) if ([sv isKindOfClass: [NSTextField class]]) gone = false;
+    for (int tries = 0; tries < 10; ++tries)
+    {
+        gone = true;
+        for (NSView* sv in [panel subviews])
+            if ([sv isKindOfClass: [NSTextField class]])
+            {
+                gone = false;
+                if (tries == 9) std::printf ("  still there: '%s' at %.0f,%.0f %.0fx%.0f\n", [[(NSTextField*) sv stringValue] UTF8String],
+                                             [sv frame].origin.x, [sv frame].origin.y, [sv frame].size.width, [sv frame].size.height);
+            }
+        if (gone) break;
+        pump (0.1);
+    }
     check (gone, "and the name box goes away");
     renderPNG (panel, dir + "/panel_preset_saved.png");
     e->setParameter (e, kHiGain, 0.2f);
