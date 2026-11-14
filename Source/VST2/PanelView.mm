@@ -73,6 +73,7 @@ const Ctl kCtls[] = {
     { kFader,    kCtlFader,  kChX, 0,        0, "FADER" },
 };
 const int kNumCtls = (int) (sizeof (kCtls) / sizeof (kCtls[0]));
+const CGFloat kBypassHalfW = 30.0, kBypassHalfH = 17.0;   // the BYPASS button
 
 // Plugin strip: logo and SAVE on the left, the preset keys in two rows of 4,
 // "M-50", the readout along the bottom
