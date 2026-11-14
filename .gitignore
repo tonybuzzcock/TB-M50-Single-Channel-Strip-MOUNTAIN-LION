@@ -1,0 +1,9 @@
+Tests/m50_test
+Tests/renders/
+*.o
+.DS_Store
+build/
+Tests/vst_host_test
+Tests/m50_asan
+Tests/*.so
+Tests/preset_test
